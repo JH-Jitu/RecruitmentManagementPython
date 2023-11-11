@@ -68,14 +68,17 @@ def delete_company():
             if line != selected_company:
                 file.write(line + "\n")
 
+    # Extract company email from the selected company
+    selectedCompanyElements = selected_company.split("#")
+    company_email = selectedCompanyElements[0]
+
     # Remove jobs associated with the company from AvailableJobs.txt
     with open("DB\\AvailableJobs.txt", "r") as file:
-        available_jobs = [line.strip() for line in file if selected_company.split("#")[1] in line]
+        available_jobs = [line.strip() for line in file if not line.startswith(company_email)]
 
+    # Write the updated list back to AvailableJobs.txt
     with open("DB\\AvailableJobs.txt", "w") as file:
-        for line in available_jobs:
-            if selected_company.split("#")[1] not in line:
-                file.write(line + "\n")
+        file.write("\n".join(available_jobs))
 
     print("Company deleted successfully!")
 
