@@ -1,9 +1,9 @@
 import os
 from Registration import register_developer, register_company, register_recruiter
-from Developers import execute_developer
+from Developer import execute_developer
 from Company import execute_company
-from Recruiters import execute_recruiter
-from Admins import execute_admin
+from Recruiter import execute_recruiter
+from Admin import execute_admin
 from ApplyToJob import execute as execute_apply_to_job
 from AssignRecruiterFromCompany import execute as execute_assign_recruiter
 from SetInterviewByRecruiter import execute as execute_set_interview
