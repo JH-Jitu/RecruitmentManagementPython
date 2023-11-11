@@ -1,4 +1,12 @@
 import os
+from Registration import register_developer, register_company, register_recruiter
+from Developers import execute_developer
+from Company import execute_company
+from Recruiters import execute_recruiter
+from Admins import execute_admin
+from ApplyToJob import execute as execute_apply_to_job
+from AssignRecruiterFromCompany import execute as execute_assign_recruiter
+from SetInterviewByRecruiter import execute as execute_set_interview
 
 def execute():
     while True:
@@ -79,22 +87,6 @@ def validate_credentials(file_path, email, password):
             if email == stored_email and password == stored_password:
                 return True
     return False
-
-def execute_developer(developer_email):
-    # Call the developer panel
-    os.system("python Developer.py")
-
-def execute_recruiter(recruiter_email):
-    # Call the recruiter panel
-    os.system("python Recruiter.py")
-
-def execute_company(company_email):
-    # Call the company panel
-    os.system("python Company.py")
-
-def execute_admin(admin_email):
-    # Call the admin panel
-    os.system("python Admin.py")
 
 if __name__ == "__main__":
     execute()
