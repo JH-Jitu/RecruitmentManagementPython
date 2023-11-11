@@ -108,11 +108,16 @@ def set_interview(recruiter_email):
         print("No developers/jobs assigned to you.")
         return
 
+    count = 0
     print("\n### Assigned Developers ###")
     for i, applied_job in enumerate(applied_jobs, start=1):
-        print(f"{i}. {applied_job}")
+        elements = applied_job.split("#")
+        if recruiter_email in elements[7]:
+            print(f"\n###Count No: {count+1}###")               
+            detailedInformation(elements[1], elements[2])
+            count += 1
 
-    applied_job_choice = int(input("Enter the number of the assigned developer: "))
+    applied_job_choice = int(input("Enter the number of the assigned developer to set Interview: "))
     selected_applied_job = applied_jobs[applied_job_choice - 1]
 
     # Extract developer  from the selected applied job
@@ -131,29 +136,47 @@ def set_interview(recruiter_email):
     print("Interview scheduled successfully!")
 
 def approve_reject_developer(recruiter_email):
-    # Read applied jobs from MessagesForRecruiters.txt
+    # Read interviews from Interviews.txt
+
+    filteredInterviews = []
     with open("DB\\Interviews.txt", "r") as file:
-        applied_jobs = [line.strip() for line in file if line.startswith(recruiter_email)]
+        interviews = [line.strip() for line in file]
 
-    if not applied_jobs:
-        print("No developers assigned to you.")
+    if not interviews:
+        print("No interviews assigned to you.")
         return
+    
+    else:
+        count = 0
+        print("\n### Interviews ###")
+        for i, interview in enumerate(interviews, start=1):
+            elements = interview.split("#")
+            if recruiter_email in elements[7]:
+                print(f"\n###Count No: {count+1}###")               
+                detailedInformation(elements[1], elements[0])
+                count += 1
+                filteredInterviews.append(interview)
 
-    print("\n### Assigned Developers ###")
-    for i, applied_job in enumerate(applied_jobs, start=1):
-        print(f"{i}. {applied_job}")
+        print(f"Total interviews for {recruiter_email}: {count}")
 
     applied_job_choice = int(input("Enter the number of the assigned developer: "))
-    selected_applied_job = applied_jobs[applied_job_choice - 1]
+    selected_interview = filteredInterviews[applied_job_choice - 1]
 
-    # Extract developer email from the selected applied job
-    developer_email = selected_applied_job.split("#")[1]
+    # Extract developer email from the selected interview
+    developer_email = selected_interview.split("#")[0]
 
     decision = input("Enter 'approve' or 'reject' for the developer: ")
 
     # Save decision to MessagesForDevelopers.txt
     with open("DB\\MessagesForDevelopers.txt", "a") as file:
-        file.write(f"{developer_email}#{decision}\n")
+        file.write(f"{decision}#{selected_interview}\n")
+    with open("DB\\MessagesForCompanies.txt", "a") as file:
+        file.write(f"{decision}#{selected_interview}\n")
+
+    # Remove the selected interview from Interviews.txt
+    interviews.remove(selected_interview)
+    with open("DB\\Interviews.txt", "w") as file:
+        file.write("\n".join(interviews))
 
     print("Decision communicated successfully!")
 
