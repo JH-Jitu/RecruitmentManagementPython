@@ -48,10 +48,25 @@ def view_personal_information(recruiter_email):
                 print(f"LinkedIn Link: {linkedin_link}")
                 break
 
-def view_messages(recruiter_email):
+
+def openMessages(recruiter_email): 
     # Read messages from MessagesForRecruiters.txt
     with open("DB\\MessagesForRecruiters.txt", "r") as file:
         messages = [line.strip() for line in file]
+        return messages
+
+
+def detailedInformation(developerEmail, companyEmail):
+    
+    developerInformation(developerEmail)
+    print("Applied in Company:...")
+    companyInformation(companyEmail)
+    # print("--------------------------------------\n")
+    
+    
+
+def view_messages(recruiter_email):
+    messages = openMessages(recruiter_email)
 
     if not messages:
         print("No messages available.")
@@ -61,12 +76,8 @@ def view_messages(recruiter_email):
         for message in messages:
             elements = message.split("#")
             if recruiter_email in elements[7]:
-                
-                print(f"-------------------Message No: {count+1}----------------------")
-                developerInformation(elements[1])
-                print("Applied in Company:")
-                companyInformation(elements[2])
-                print("--------------------------------------\n")
+                print(f"\n###Count No: {count+1}###")               
+                detailedInformation(elements[1], elements[2])
                 count += 1
 
 
@@ -78,23 +89,23 @@ def see_interviews(recruiter_email):
     if not interviews:
         print("No interviews available.")
     else:
-        print("\n### Interviews ###")
         count = 0
+        print("\n### Interviews ###")
         for interview in interviews:
-            assigned_recruiter_email = interview.split("#")[6]
-            if assigned_recruiter_email == recruiter_email:
-                print(interview)
+            elements = interview.split("#")
+            if recruiter_email in elements[7]:
+                print(f"\n###Count No: {count+1}###")               
+                detailedInformation(elements[1], elements[0])
                 count += 1
 
         print(f"Total interviews for {recruiter_email}: {count}")
 
 def set_interview(recruiter_email):
     # Read applied jobs from MessagesForRecruiters.txt
-    with open("DB\\MessagesForRecruiters.txt", "r") as file:
-        applied_jobs = [line.strip() for line in file if line.startswith(recruiter_email)]
+    applied_jobs = openMessages(recruiter_email)
 
     if not applied_jobs:
-        print("No developers assigned to you.")
+        print("No developers/jobs assigned to you.")
         return
 
     print("\n### Assigned Developers ###")
@@ -104,8 +115,9 @@ def set_interview(recruiter_email):
     applied_job_choice = int(input("Enter the number of the assigned developer: "))
     selected_applied_job = applied_jobs[applied_job_choice - 1]
 
-    # Extract developer email from the selected applied job
-    developer_email = selected_applied_job.split("#")[1]
+    # Extract developer  from the selected applied job
+    developer = selected_applied_job
+
 
     date_and_time = input("Enter date and time for the interview: ")
     assignment_link = input("Enter assignment link: ")
@@ -114,13 +126,13 @@ def set_interview(recruiter_email):
 
     # Save interview information to file (Interviews.txt)
     with open("DB\\Interviews.txt", "a") as file:
-        file.write(f"{developer_email}#{date_and_time}#{assignment_link}#{google_meet_link}#{participators}\n")
+        file.write(f"{developer}#{date_and_time}#{assignment_link}#{google_meet_link}#{participators}\n")
 
     print("Interview scheduled successfully!")
 
 def approve_reject_developer(recruiter_email):
     # Read applied jobs from MessagesForRecruiters.txt
-    with open("DB\\MessagesForRecruiters.txt", "r") as file:
+    with open("DB\\Interviews.txt", "r") as file:
         applied_jobs = [line.strip() for line in file if line.startswith(recruiter_email)]
 
     if not applied_jobs:
