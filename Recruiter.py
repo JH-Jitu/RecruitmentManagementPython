@@ -1,6 +1,6 @@
 import os
-from Developer import view_personal_information as developerInformation
-from Company import view_personal_information as companyInformation
+
+
 
 def execute(recruiter_email):
     while True:
@@ -57,11 +57,12 @@ def openMessages(recruiter_email):
 
 
 def detailedInformation(developerEmail, companyEmail):
-    
+    from Company import view_personal_information as companyInformation
+    from Developer import view_personal_information as developerInformation
     developerInformation(developerEmail)
     print("Applied in Company:...")
     companyInformation(companyEmail)
-    # print("--------------------------------------\n")
+    print("--------------------------------------\n")
     
     
 

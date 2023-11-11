@@ -1,6 +1,7 @@
 import os
 from ApplyToJob import apply_to_job
 
+
 def execute(developer_email):
     while True:
         print("\n### Developer Panel ###")
@@ -48,6 +49,8 @@ def view_personal_information(developer_email):
 
 
 def view_applied_jobs(developer_email):
+    from Company import view_personal_information as companyInformation
+    from Recruiter import view_personal_information as recruiterInformation
     # Read applied jobs from AppliedJobsOfDevelopers.txt
     with open("DB\\AppliedJobsOfDevelopers.txt", "r") as file:
         applied_jobs = [line.strip() for line in file if line.startswith(developer_email)]
@@ -56,8 +59,32 @@ def view_applied_jobs(developer_email):
         print("No applied jobs.")
     else:
         print("\n### Applied Jobs ###")
-        for applied_job in applied_jobs:
-            print(applied_job)
+        for i, applied_job in enumerate(applied_jobs):
+            elements = applied_job.split("#")
+
+            
+
+            print(f"###{i}. Company....###")
+            companyInformation(elements[1])
+            print(f"Role:  {elements[2]}")
+            print(f"Job Description:  {elements[3]}")
+            print(f"Job Description:  {elements[4]}")
+            print(f"Joining Date:  {elements[5]}")
+            print("\nRecruiter....")
+            
+            recruiterInformation(elements[6])
+            
+            print("--------------------------------------\n")
+
+
+def detailedInformation(developerEmail, companyEmail):
+    from Company import view_personal_information as companyInformation
+    view_personal_information(developerEmail)
+    print("Applied in Company:...")
+    companyInformation(companyEmail)
+    print("--------------------------------------\n")
+    
+    
 
 def view_messages(developer_email):
     # Read messages from MessagesForDevelopers.txt
@@ -70,6 +97,23 @@ def view_messages(developer_email):
         print("\n### Messages ###")
         for message in messages:
             print(message)
+
+    with open("DB\\MessagesForDevelopers.txt", "r") as file:
+        messages = [line.strip() for line in file]
+
+    if not messages:
+        print("No messages available.")
+    else:
+        count = 0
+        print("\n### Messages ###")
+        for message in messages:
+            elements = message.split("#")
+            if developer_email in elements[2]:
+                messageOfApprovement = "***🎉🎉🎉 Successfully Passed Interview! You are joining 🎉🎉🎉***" if elements[0] == "approve" else "***😔 You Failed the Interview! You are joining 😔***"
+                print(f"\n###Count No: {count+1}###")               
+                print(messageOfApprovement)               
+                detailedInformation(elements[2], elements[1])
+                count += 1
 
 def view_interviews(developer_email):
     # Read interviews from Interviews.txt
