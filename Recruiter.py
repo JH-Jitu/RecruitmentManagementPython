@@ -73,14 +73,20 @@ def view_messages(recruiter_email):
 def see_interviews(recruiter_email):
     # Read interviews from Interviews.txt
     with open("DB\\Interviews.txt", "r") as file:
-        interviews = [line.strip() for line in file if recruiter_email in line]
+        interviews = [line.strip() for line in file]
 
     if not interviews:
-        print("No interviews scheduled.")
+        print("No interviews available.")
     else:
         print("\n### Interviews ###")
+        count = 0
         for interview in interviews:
-            print(interview)
+            assigned_recruiter_email = interview.split("#")[6]
+            if assigned_recruiter_email == recruiter_email:
+                print(interview)
+                count += 1
+
+        print(f"Total interviews for {recruiter_email}: {count}")
 
 def set_interview(recruiter_email):
     # Read applied jobs from MessagesForRecruiters.txt
