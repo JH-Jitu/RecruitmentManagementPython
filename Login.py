@@ -1,9 +1,9 @@
 import os
 from Registration import register_developer, register_company, register_recruiter
-from Developer import execute_developer
-from Company import execute_company
-from Recruiter import execute_recruiter
-from Admin import execute_admin
+from Developer import execute as execute_developer
+from Company import execute as execute_company
+from Recruiter import execute as execute_recruiter
+from Admin import execute as execute_admin
 from ApplyToJob import execute as execute_apply_to_job
 from AssignRecruiterFromCompany import execute as execute_assign_recruiter
 from SetInterviewByRecruiter import execute as execute_set_interview
@@ -83,10 +83,12 @@ def validate_credentials(file_path, email, password):
     # Validate credentials from the specified file
     with open(file_path, "r") as file:
         for line in file:
-            stored_email, stored_password, _ = line.strip().split("#")
+            stored_email, stored_password, *_ = line.strip().split("#")
             if email == stored_email and password == stored_password:
                 return True
     return False
+
+
 
 if __name__ == "__main__":
     execute()
