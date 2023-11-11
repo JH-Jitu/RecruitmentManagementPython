@@ -1,4 +1,6 @@
 import os
+from Developer import view_personal_information as developerInformation
+from Company import view_personal_information as companyInformation
 
 def execute(recruiter_email):
     while True:
@@ -54,11 +56,19 @@ def view_messages(recruiter_email):
     if not messages:
         print("No messages available.")
     else:
+        count = 0
         print("\n### Messages ###")
         for message in messages:
             elements = message.split("#")
-            if recruiter_email in elements[6]:
-                print(message)
+            if recruiter_email in elements[7]:
+                
+                print(f"-------------------Message No: {count+1}----------------------")
+                developerInformation(elements[1])
+                print("Applied in Company:")
+                companyInformation(elements[2])
+                print("--------------------------------------\n")
+                count += 1
+
 
 def see_interviews(recruiter_email):
     # Read interviews from Interviews.txt
