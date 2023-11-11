@@ -79,14 +79,30 @@ def login_as_admin():
     else:
         print("Invalid credentials. Please try again.")
 
+
+### Validate (From First two elements) ###
+# def validate_credentials(file_path, email, password):
+#     # Validate credentials from the specified file
+#     with open(file_path, "r") as file:
+#         for line in file:
+#             stored_email, stored_password, *_ = line.strip().split("#")
+#             if email == stored_email and password == stored_password:
+#                 return True
+#     return False
+
+# Validate Dynamically with index
 def validate_credentials(file_path, email, password):
     # Validate credentials from the specified file
     with open(file_path, "r") as file:
         for line in file:
-            stored_email, stored_password, *_ = line.strip().split("#")
-            if email == stored_email and password == stored_password:
+            # Split the line into parts
+            parts = line.strip().split("#")
+            
+            # Check if email and password match
+            if email == parts[0] and password == parts[1]:
                 return True
     return False
+
 
 
 

@@ -58,7 +58,7 @@ def register_company():
 
     # Save company information to file (RegisteredCompanies.txt)
     with open("DB\\RegisteredCompanies.txt", "a") as file:
-        file.write(f"{name}#{email}#{password}#{license_no}#{employee_number}\n")
+        file.write(f"{email}#{password}#{name}#{license_no}#{employee_number}\n")
 
     print("Registration successful!")
     print(f"Your password is: {password}")
