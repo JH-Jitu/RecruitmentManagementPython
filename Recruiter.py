@@ -49,14 +49,16 @@ def view_personal_information(recruiter_email):
 def view_messages(recruiter_email):
     # Read messages from MessagesForRecruiters.txt
     with open("DB\\MessagesForRecruiters.txt", "r") as file:
-        messages = [line.strip() for line in file if line.startswith(recruiter_email)]
+        messages = [line.strip() for line in file]
 
     if not messages:
         print("No messages available.")
     else:
         print("\n### Messages ###")
         for message in messages:
-            print(message)
+            elements = message.split("#")
+            if recruiter_email in elements[6]:
+                print(message)
 
 def see_interviews(recruiter_email):
     # Read interviews from Interviews.txt

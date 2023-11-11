@@ -88,14 +88,29 @@ def apply_to_job(developer_email):
     company_email = selected_job.split("#")[0]
 
     # Save application to file (AppliedJobsOfDevelopers.txt)
-    with open("DB\\AppliedJobsOfDevelopers.txt", "a") as file:
-        file.write(f"{developer_email}#{selected_job}\n")
+     # Check if the application already exists in AppliedJobsOfDevelopers.txt
+    if not is_duplicate_application(developer_email, selected_job):
+        # Save application to file (AppliedJobsOfDevelopers.txt)
+        with open("DB\\AppliedJobsOfDevelopers.txt", "a") as file:
+            file.write(f"{developer_email}#{selected_job}\n")
 
-    # Notify the company about the application
-    with open("DB\\MessagesForCompanies.txt", "a") as file:
-        file.write(f"{company_email}#Developer {developer_email} applied to job: {selected_job}\n")
+        # Notify the company about the application
+        company_email = selected_job.split("#")[0]
+        with open("DB\\MessagesForRecruiters.txt", "a") as file:
+            file.write(f"{company_email}#Developer {developer_email} applied to job: {selected_job}\n")
 
-    print("Application submitted successfully!")
+        print("Application submitted successfully!")
+    else:
+        print("Application already exists. Cannot submit duplicate application.")
+
+def is_duplicate_application(developer_email, selected_job):
+    # Check if the application already exists in AppliedJobsOfDevelopers.txt
+    with open("DB\\AppliedJobsOfDevelopers.txt", "r") as file:
+        for line in file:
+            if line.strip() == f"{developer_email}#{selected_job}":
+                return True
+    return False
+    
 
 
 def view_applied_jobs(developer_email):
