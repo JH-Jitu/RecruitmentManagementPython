@@ -40,6 +40,17 @@ def view_available_jobs(developer_email):
             print(f"{i}. {job}")
 
 def apply_to_job(developer_email):
+    # Read developer skills from RegisteredDevelopers.txt
+    developer_skills = None
+    with open("DB\\RegisteredDevelopers.txt", "r") as file:
+        for line in file:
+            if line.startswith(developer_email):
+                developer_skills = line.split("#")[4].split(", ")
+
+    if developer_skills is None:
+        print("Developer skills not found.")
+        return
+
     # Read available jobs from AvailableJobs.txt
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file]
@@ -48,12 +59,30 @@ def apply_to_job(developer_email):
         print("No available jobs to apply.")
         return
 
+    # Filter jobs based on developer skills
+    matching_jobs = []
+    for job in available_jobs:
+        # company_email, role_name, required_skills, _, _, _ = job.split("#")
+        company_email = job.split("#")[0]
+        required_skills = job.split("#")[2]
+        company_required_skills = set(required_skills.split(", "))
+        developer_skills_set = set(developer_skills)
+        
+        # Check if any developer skills match the company required skills
+        if developer_skills_set.intersection(company_required_skills):
+            matching_jobs.append(job)
+
+    if not matching_jobs:
+        print("No available jobs matching your skills.")
+        return
+    
+
     print("\n### Available Jobs for Application ###")
-    for i, job in enumerate(available_jobs, start=1):
+    for i, job in enumerate(matching_jobs, start=1):
         print(f"{i}. {job}")
 
     job_choice = int(input("Enter the job number to apply: "))
-    selected_job = available_jobs[job_choice - 1]
+    selected_job = matching_jobs[job_choice - 1]
 
     # Extract company email from the selected job
     company_email = selected_job.split("#")[0]
@@ -67,6 +96,7 @@ def apply_to_job(developer_email):
         file.write(f"{company_email}#Developer {developer_email} applied to job: {selected_job}\n")
 
     print("Application submitted successfully!")
+
 
 def view_applied_jobs(developer_email):
     # Read applied jobs from AppliedJobsOfDevelopers.txt

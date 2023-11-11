@@ -1,4 +1,5 @@
 import os
+from ApplyToJob import apply_to_job
 
 def execute(developer_email):
     while True:
@@ -45,34 +46,6 @@ def view_personal_information(developer_email):
                 print(f"LinkedIn Link: {linkedin_link}")
                 break
 
-def apply_to_job(developer_email):
-    # Read available jobs from AvailableJobs.txt
-    with open("DB\\AvailableJobs.txt", "r") as file:
-        available_jobs = [line.strip() for line in file]
-
-    if not available_jobs:
-        print("No available jobs to apply.")
-        return
-
-    print("\n### Available Jobs for Application ###")
-    for i, job in enumerate(available_jobs, start=1):
-        print(f"{i}. {job}")
-
-    job_choice = int(input("Enter the job number to apply: "))
-    selected_job = available_jobs[job_choice - 1]
-
-    # Extract company email from the selected job
-    company_email = selected_job.split("#")[0]
-
-    # Save application to file (AppliedJobsOfDevelopers.txt)
-    with open("DB\\AppliedJobsOfDevelopers.txt", "a") as file:
-        file.write(f"{developer_email}#{selected_job}\n")
-
-    # Notify the company about the application
-    with open("DB\\MessagesForCompanies.txt", "a") as file:
-        file.write(f"{company_email}#Developer {developer_email} applied to job: {selected_job}\n")
-
-    print("Application submitted successfully!")
 
 def view_applied_jobs(developer_email):
     # Read applied jobs from AppliedJobsOfDevelopers.txt
