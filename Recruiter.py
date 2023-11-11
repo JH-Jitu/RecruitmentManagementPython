@@ -102,6 +102,7 @@ def see_interviews(recruiter_email):
 
 def set_interview(recruiter_email):
     # Read applied jobs from MessagesForRecruiters.txt
+    filteredJobs = []
     applied_jobs = openMessages(recruiter_email)
 
     if not applied_jobs:
@@ -116,9 +117,10 @@ def set_interview(recruiter_email):
             print(f"\n###Count No: {count+1}###")               
             detailedInformation(elements[1], elements[2])
             count += 1
+            filteredJobs.append(applied_job)
 
     applied_job_choice = int(input("Enter the number of the assigned developer to set Interview: "))
-    selected_applied_job = applied_jobs[applied_job_choice - 1]
+    selected_applied_job = filteredJobs[applied_job_choice - 1]
 
     # Extract developer  from the selected applied job
     developer = selected_applied_job
