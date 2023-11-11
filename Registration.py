@@ -51,7 +51,6 @@ def register_company():
 
     print("Company registered successfully!")
 
-# You can add more functions for additional registration logic as needed
 
 if __name__ == "__main__":
     register_user()
