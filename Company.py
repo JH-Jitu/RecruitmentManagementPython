@@ -74,6 +74,7 @@ def delete_job(company_email):
     print("Job deleted successfully!")
 
 def view_available_jobs(company_email):
+    from Recruiter import view_personal_information as recruiterInformation
     # Read available jobs from AvailableJobs.txt
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file if line.startswith(company_email)]
@@ -82,8 +83,16 @@ def view_available_jobs(company_email):
         print("No available jobs.")
     else:
         print("\n### Available Jobs ###")
-        for job in available_jobs:
-            print(job)
+        for i, job in enumerate(available_jobs, start=1):
+            elements = job.split("#")
+            print(f"###Count {i}\n")
+            print(f"Role:  {elements[1]}")
+            print(f"Skill Required:  {elements[2]}")
+            print(f"Job Description:  {elements[3]}")
+            print(f"Joining Date:  {elements[4]}")
+            print("\nRecruiter....")
+            recruiterInformation(elements[5])
+            print("--------------------------------------\n")
 
 def view_personal_information(company_email):
     # Read company information from RegisteredCompanies.txt

@@ -40,7 +40,7 @@ def view_personal_information(recruiter_email):
             if email == recruiter_email:
                 print("\n### Personal Information ###")
                 print(f"Email: {email}")
-                print(f"Password: {password}")  
+                # print(f"Password: {password}")  
                 print(f"Name: {name}")
                 print(f"Age: {age}")
                 print(f"Expertise Skills: {expertise_skills}")
