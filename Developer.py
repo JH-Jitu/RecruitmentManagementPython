@@ -67,7 +67,7 @@ def view_applied_jobs(developer_email):
             print(f"###{i}. Company....###")
             companyInformation(elements[1])
             print(f"Role:  {elements[2]}")
-            print(f"Job Description:  {elements[3]}")
+            print(f"Skill Required:  {elements[3]}")
             print(f"Job Description:  {elements[4]}")
             print(f"Joining Date:  {elements[5]}")
             print("\nRecruiter....")

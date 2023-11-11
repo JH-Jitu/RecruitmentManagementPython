@@ -40,6 +40,9 @@ def view_available_jobs(developer_email):
             print(f"{i}. {job}")
 
 def apply_to_job(developer_email):
+    from Company import view_personal_information as companyInformation
+    from Recruiter import view_personal_information as recruiterInformation
+
     # Read developer skills from RegisteredDevelopers.txt
     developer_skills = None
     with open("DB\\RegisteredDevelopers.txt", "r") as file:
@@ -79,7 +82,16 @@ def apply_to_job(developer_email):
 
     print("\n### Available Jobs for Application ###")
     for i, job in enumerate(matching_jobs, start=1):
-        print(f"{i}. {job}")
+        elements = job.split("#")
+        print(f"###Count {i}\n")
+        companyInformation(elements[0])
+        print(f"Role:  {elements[1]}")
+        print(f"Skill Required:  {elements[2]}")
+        print(f"Job Description:  {elements[3]}")
+        print(f"Joining Date:  {elements[4]}")
+        print("\nRecruiter....")
+        recruiterInformation(elements[5])
+        print("--------------------------------------\n")
 
     job_choice = int(input("Enter the job number to apply: "))
     selected_job = matching_jobs[job_choice - 1]
