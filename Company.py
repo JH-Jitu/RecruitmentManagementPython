@@ -51,25 +51,35 @@ def create_job(company_email):
 
 def delete_job(company_email):
     # Read available jobs from AvailableJobs.txt
+    filteredJobs = []
     with open("DB\\AvailableJobs.txt", "r") as file:
-        available_jobs = [line.strip() for line in file if line.startswith(company_email)]
+        available_jobs = [line.strip() for line in file]
 
     if not available_jobs:
         print("No jobs available for deletion.")
         return
-
-    print("\n### Available Jobs for Deletion ###")
-    for i, job in enumerate(available_jobs, start=1):
-        print(f"{i}. {job}")
+    else:
+        count = 0
+        print("\n### Available Jobs for Deletion ###")
+        for i, job in enumerate(available_jobs, start=1):
+            elements = job.split("#")
+            if company_email in elements[0]:
+                print(f"###Count {count+1}\n")
+                print(f"Role:  {elements[1]}")
+                print(f"Skill Required:  {elements[2]}")
+                print(f"Job Description:  {elements[3]}")
+                print(f"Joining Date:  {elements[4]}")
+                print("--------------------------------------\n")
+                count += 1
+                filteredJobs.append(job)
 
     job_choice = int(input("Enter the job number to delete: "))
-    selected_job = available_jobs[job_choice - 1]
+    selected_job = filteredJobs[job_choice - 1]
 
-    # Remove the job from AvailableJobs.txt
+    # Remove the selected job from available_jobs list
+    available_jobs.remove(selected_job)
     with open("DB\\AvailableJobs.txt", "w") as file:
-        for line in available_jobs:
-            if line != selected_job:
-                file.write(line + "\n")
+        file.write("\n".join(available_jobs))
 
     print("Job deleted successfully!")
 
@@ -102,7 +112,7 @@ def view_personal_information(company_email):
             if email == company_email:
                 print("\n### Personal Information ###")
                 print(f"Email: {email}")
-                print(f"Password: {password}")  
+                # print(f"Password: {password}")  
                 print(f"Name: {name}")
                 print(f"License No: {license_no}")
                 print(f"Employee Number: {employee_number}")
