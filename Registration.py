@@ -34,7 +34,7 @@ def generate_random_password():
 def register_developer():
     print("\n### Register as Developer ###")
     email = input("Enter your email: ")
-    password = generate_random_password()
+    password = input("Enter your password: ")
     name = input("Enter your name: ")
     age = input("Enter your age: ")
     expertise_skills = input("Enter your expertise skills (comma-separated): ")
@@ -52,7 +52,7 @@ def register_company():
     print("\n### Register as Company ###")
     name = input("Enter company name: ")
     email = input("Enter company email: ")
-    password = generate_random_password()
+    password = input("Enter your password: ")
     license_no = input("Enter company license number: ")
     employee_number = input("Enter company employee number: ")
 
@@ -66,7 +66,7 @@ def register_company():
 def register_recruiter():
     print("\n### Register as Recruiter ###")
     email = input("Enter your email: ")
-    password = generate_random_password()
+    password = input("Enter your password: ")
     name = input("Enter your name: ")
     age = input("Enter your age: ")
     expertise_skills = input("Enter your expertise skills (comma-separated): ")
