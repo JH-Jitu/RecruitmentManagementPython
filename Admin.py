@@ -59,7 +59,7 @@ def delete_company():
     print("\n### Available Companies for Deletion ###")
     for i, company in enumerate(companies, start=1):
         elements = company.split("#")
-        print(f"###Count {i}\n")
+        print(f"\n###Count {i}\n")
         companyInformation(elements[0])
 
     company_choice = int(input("Enter the company number to delete: "))
@@ -98,7 +98,7 @@ def delete_recruiter():
     print("\n### Available Recruiters for Deletion ###")
     for i, recruiter in enumerate(recruiters, start=1):
         elements = recruiter.split("#")
-        print(f"###Count {i}\n")
+        print(f"\n###Count {i}\n")
         recruiterInformation(elements[0])
 
     recruiter_choice = int(input("Enter the recruiter number to delete: "))
@@ -137,7 +137,7 @@ def delete_developer():
     print("\n### Available Developers for Deletion ###")
     for i, developer in enumerate(developers, start=1):
         elements = developer.split("#")
-        print(f"###Count {i}\n")
+        print(f"\n###Count {i}\n")
         developerInformation(elements[0])
 
     developer_choice = int(input("Enter the developer number to delete: "))

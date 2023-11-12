@@ -7,9 +7,8 @@ def execute():
         print("\n### Registration ###")
         print("1. Register as Developer")
         print("2. Register as Company")
-        print("3. Register as Recruiter")
-        print("4. Back to Main Menu")
-        print("5. Exit")
+        print("3. Back to Main Menu")
+        print("4. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -18,10 +17,8 @@ def execute():
         elif choice == "2":
             register_company()
         elif choice == "3":
-            register_recruiter()
-        elif choice == "4":
             break
-        elif choice == "5":
+        elif choice == "4":
             exit()
         else:
             print("Invalid choice. Please try again.")
@@ -63,22 +60,3 @@ def register_company():
     print("Registration successful!")
     print(f"Your password is: {password}")
 
-def register_recruiter():
-    print("\n### Register as Recruiter ###")
-    email = input("Enter your email: ")
-    password = input("Enter your password: ")
-    name = input("Enter your name: ")
-    age = input("Enter your age: ")
-    expertise_skills = input("Enter your expertise skills (comma-separated): ")
-    project_links = input("Enter your project links (comma-separated): ")
-    linkedin_link = input("Enter your LinkedIn link: ")
-
-    # Save recruiter information to file (RegisteredRecruiters.txt)
-    with open("DB\\RegisteredRecruiters.txt", "a") as file:
-        file.write(f"{email}#{password}#{name}#{age}#{expertise_skills}#{project_links}#{linkedin_link}\n")
-
-    print("Registration successful!")
-    print(f"Your password is: {password}")
-
-if __name__ == "__main__":
-    execute()

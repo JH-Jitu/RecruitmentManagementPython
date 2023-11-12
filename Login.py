@@ -1,5 +1,5 @@
 import os
-from Registration import register_developer, register_company, register_recruiter
+from Registration import register_developer, register_company
 from Developer import execute as execute_developer
 from Company import execute as execute_company
 from Recruiter import execute as execute_recruiter
