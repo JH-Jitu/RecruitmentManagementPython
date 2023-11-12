@@ -11,3 +11,4 @@ rhyme@company.com#2#2#2#2#123@recruiter.com
 123@company.com#1#1#1#1#jitu@recruiter.com
 shohan@company.com#2#2#2#2#123@recruiter.com
 123@company.com#1#1#1#1#123@recruiter.com
+jitu@company.com#UI Developer#figma#salary 18000, remote job#01/01/2024#jitu@recruiter.com
