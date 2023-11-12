@@ -2,4 +2,3 @@ jitu@developer.com#123456#Md. Jitu For Developer#23#JavaScript, React, React-Nat
 rokeya@developer.com#123456#Rokeya Khatun#23#JavaScript, React, React-Native, NodeJS, ExpressJS, NestJS, NextJS, Python, Django#something1.com, something2.com, something3.com#https://www.linkedin.com/in/md-jidanul-hakim-jitu-a1064819a
 rhyme@developer.com#123456#Rhyme Rubayet#23#JavaScript, React, React-Native, NodeJS, ExpressJS, NestJS, NextJS, Python, Django#something1.com, something2.com, something3.com#https://www.linkedin.com/in/md-jidanul-hakim-jitu-a1064819a
 shohan@developer.com#123456#Nahim Hossain Shohan#23#Ruby, Java, OOP#something1.com, something2.com, something3.com#https://www.linkedin.com/in/md-jidanul-hakim-jitu-a1064819a
-

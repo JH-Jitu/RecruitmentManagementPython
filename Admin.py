@@ -104,16 +104,19 @@ def delete_recruiter():
             if line != selected_recruiter:
                 file.write(line + "\n")
 
+    # Extract recruiter email from the selected recruiter
+    recruiter_email = selected_recruiter.split("#")[0]
+
     # Remove jobs associated with the recruiter from AvailableJobs.txt
     with open("DB\\AvailableJobs.txt", "r") as file:
-        available_jobs = [line.strip() for line in file if selected_recruiter.split("#")[0] in line]
+        available_jobs = [line.strip() for line in file if recruiter_email not in line]
 
+    # Write the updated list back to AvailableJobs.txt
     with open("DB\\AvailableJobs.txt", "w") as file:
-        for line in available_jobs:
-            if selected_recruiter.split("#")[0] not in line:
-                file.write(line + "\n")
+        file.write("\n".join(available_jobs))
 
     print("Recruiter deleted successfully!")
+
 
 def delete_developer():
     # Read developers from RegisteredDevelopers.txt
