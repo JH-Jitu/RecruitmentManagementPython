@@ -33,7 +33,7 @@ def execute(developer_email):
             print("Invalid choice. Please try again.")
 
 def view_personal_information(developer_email):
-    # Read developer information from RegisteredDevelopers.txt
+    
     with open("DB\\RegisteredDevelopers.txt", "r") as file:
         for line in file:
             email, password, name, age, expertise_skills, project_links, linkedin_link = line.split("#")
@@ -51,7 +51,7 @@ def view_personal_information(developer_email):
 def view_applied_jobs(developer_email):
     from Company import view_personal_information as companyInformation
     from Recruiter import view_personal_information as recruiterInformation
-    # Read applied jobs from AppliedJobsOfDevelopers.txt
+    
     with open("DB\\AppliedJobsOfDevelopers.txt", "r") as file:
         applied_jobs = [line.strip() for line in file if line.startswith(developer_email)]
 
@@ -87,7 +87,7 @@ def detailedInformation(developerEmail, companyEmail):
     
 
 def view_messages(developer_email):
-    # Read messages from MessagesForDevelopers.txt
+    
     with open("DB\\MessagesForDevelopers.txt", "r") as file:
         messages = [line.strip() for line in file if line.startswith(developer_email)]
 
@@ -116,7 +116,7 @@ def view_messages(developer_email):
                 count += 1
 
 def view_interviews(developer_email):
-    # Read interviews from Interviews.txt
+    
     with open("DB\\Interviews.txt", "r") as file:
         interviews = [line.strip() for line in file if developer_email in line]
 

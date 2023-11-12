@@ -92,30 +92,3 @@ Then, For companies functionality will be executed
 
 If 4 (Admin) is Pressed (authenticate from Admins)::
 Then, For admins functionality will be executed
-
-### All Utility Methods
-def option():
-    print("\n### Press any option and hit enter ###")
-def MainMenu():
-    os.system('cls')
-    option()
-    print("1. Login")
-    print("2. Registration")
-    print("3. Exit")
-
-def LoginOption():
-    os.system('cls')
-    option()
-    print("Login As")
-    print("1. Developer")
-    print("2. Recruiter")
-    print("3. Company")
-    print("4. Admin")
-    print("5. Back")
-    print("5. Back to Main Menu")
-    print("5. Exit")
-    
-        
-def pause():
-    print("Press any key to continue!")
-    input()
