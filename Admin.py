@@ -47,6 +47,7 @@ def create_recruiter():
     print("Recruiter created successfully!")
 
 def delete_company():
+    from Company import view_personal_information as companyInformation
     # Read companies from RegisteredCompanies.txt
     with open("DB\\RegisteredCompanies.txt", "r") as file:
         companies = [line.strip() for line in file]
@@ -57,7 +58,9 @@ def delete_company():
 
     print("\n### Available Companies for Deletion ###")
     for i, company in enumerate(companies, start=1):
-        print(f"{i}. {company}")
+        elements = company.split("#")
+        print(f"###Count {i}\n")
+        companyInformation(elements[0])
 
     company_choice = int(input("Enter the company number to delete: "))
     selected_company = companies[company_choice - 1]
@@ -83,6 +86,7 @@ def delete_company():
     print("Company deleted successfully!")
 
 def delete_recruiter():
+    from Recruiter import view_personal_information as recruiterInformation
     # Read recruiters from RegisteredRecruiters.txt
     with open("DB\\RegisteredRecruiters.txt", "r") as file:
         recruiters = [line.strip() for line in file]
@@ -93,7 +97,9 @@ def delete_recruiter():
 
     print("\n### Available Recruiters for Deletion ###")
     for i, recruiter in enumerate(recruiters, start=1):
-        print(f"{i}. {recruiter}")
+        elements = recruiter.split("#")
+        print(f"###Count {i}\n")
+        recruiterInformation(elements[0])
 
     recruiter_choice = int(input("Enter the recruiter number to delete: "))
     selected_recruiter = recruiters[recruiter_choice - 1]
@@ -119,6 +125,7 @@ def delete_recruiter():
 
 
 def delete_developer():
+    from Developer import view_personal_information as developerInformation
     # Read developers from RegisteredDevelopers.txt
     with open("DB\\RegisteredDevelopers.txt", "r") as file:
         developers = [line.strip() for line in file]
@@ -129,7 +136,9 @@ def delete_developer():
 
     print("\n### Available Developers for Deletion ###")
     for i, developer in enumerate(developers, start=1):
-        print(f"{i}. {developer}")
+        elements = developer.split("#")
+        print(f"###Count {i}\n")
+        developerInformation(elements[0])
 
     developer_choice = int(input("Enter the developer number to delete: "))
     selected_developer = developers[developer_choice - 1]
