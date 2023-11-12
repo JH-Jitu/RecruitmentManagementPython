@@ -24,5 +24,5 @@ def execute():
             print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
-    execute_utility()  # Ensure the 'DB' folder and files are created
+    execute_utility()
     execute()
