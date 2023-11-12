@@ -123,9 +123,19 @@ def view_interviews(developer_email):
     if not interviews:
         print("No interviews scheduled.")
     else:
+        count = 0
         print("\n### Scheduled Interviews ###")
         for interview in interviews:
-            print(interview)
+            elements = interview.split("#")
+            if developer_email in elements[1]:
+                print(f"\n###Count No: {count+1}")       
+                print(f"Job Role: {elements[3]}")       
+                print(f"Job Description: {elements[4]}")       
+                print(f"Join time for Interview: {elements[7]}")     
+                print(f"Interview Meet Link: {elements[9]}")
+                print("................................")
+                
+                count += 1
 
 if __name__ == "__main__":
     execute("developer@example.com")  
