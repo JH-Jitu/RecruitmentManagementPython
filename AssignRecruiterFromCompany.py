@@ -25,7 +25,7 @@ def execute(company_email):
             print("Invalid choice. Please try again.")
 
 def view_available_jobs(company_email):
-    # Read available jobs from AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file if line.startswith(company_email)]
 
@@ -37,7 +37,7 @@ def view_available_jobs(company_email):
             print(job)
 
 def assign_recruiter(company_email):
-    # Read available jobs from AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file if line.startswith(company_email)]
 
@@ -52,21 +52,21 @@ def assign_recruiter(company_email):
     job_choice = int(input("Enter the job number to assign a recruiter: "))
     selected_job = available_jobs[job_choice - 1]
 
-    # Extract recruiter email from the selected job
+    
     recruiter_email = selected_job.split("#")[-1]
 
-    # Save assignment to file (AssignedRecruiters.txt)
+    
     with open("DB\\AssignedRecruiters.txt", "a") as file:
         file.write(f"{company_email}#{selected_job}\n")
 
-    # Notify the recruiter about the assignment
+    
     with open("DB\\MessagesForRecruiters.txt", "a") as file:
         file.write(f"{recruiter_email}#You have been assigned to job: {selected_job} by {company_email}\n")
 
     print("Recruiter assigned successfully!")
 
 def view_assigned_recruiters(company_email):
-    # Read assigned recruiters from AssignedRecruiters.txt
+    
     with open("DB\\AssignedRecruiters.txt", "r") as file:
         assigned_recruiters = [line.strip() for line in file if line.startswith(company_email)]
 
