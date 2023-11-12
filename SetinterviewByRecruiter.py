@@ -25,7 +25,7 @@ def execute(recruiter_email):
             print("Invalid choice. Please try again.")
 
 def view_applied_jobs(recruiter_email):
-    # Read applied jobs from MessagesForRecruiters.txt
+    
     with open("DB\\MessagesForRecruiters.txt", "r") as file:
         applied_jobs = [line.strip() for line in file if line.startswith(recruiter_email)]
 
@@ -37,7 +37,7 @@ def view_applied_jobs(recruiter_email):
             print(applied_job)
 
 def set_interview(recruiter_email):
-    # Read applied jobs from MessagesForRecruiters.txt
+    
     with open("DB\\MessagesForRecruiters.txt", "r") as file:
         applied_jobs = [line.strip() for line in file if line.startswith(recruiter_email)]
 
@@ -52,7 +52,7 @@ def set_interview(recruiter_email):
     applied_job_choice = int(input("Enter the number of the applied job to set an interview: "))
     selected_applied_job = applied_jobs[applied_job_choice - 1]
 
-    # Extract developer email from the selected applied job
+    
     developer_email = selected_applied_job.split("#")[1]
 
     date_and_time = input("Enter date and time for the interview: ")
@@ -60,18 +60,18 @@ def set_interview(recruiter_email):
     google_meet_link = input("Enter Google Meet link: ")
     participators = input("Enter a comma-separated list of participators' emails: ")
 
-    # Save interview information to file (Interviews.txt)
+    
     with open("DB\\Interviews.txt", "a") as file:
         file.write(f"{developer_email}#{date_and_time}#{assignment_link}#{google_meet_link}#{participators}\n")
 
-    # Notify the developer about the interview
+    
     with open("DB\\MessagesForDevelopers.txt", "a") as file:
         file.write(f"{developer_email}#You have been scheduled for an interview by {recruiter_email}\n")
 
     print("Interview scheduled successfully!")
 
 def view_scheduled_interviews(recruiter_email):
-    # Read interviews from Interviews.txt
+    
     with open("DB\\Interviews.txt", "r") as file:
         interviews = [line.strip() for line in file if recruiter_email in line]
 
