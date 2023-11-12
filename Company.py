@@ -34,7 +34,7 @@ def create_job(company_email):
     job_description = input("Enter job description: ")
     joining_date = input("Enter joining date: ")
 
-    # Assign a recruiter from the list
+    
     recruiters = get_recruiters()
     print("\n### Available Recruiters ###")
     for i, recruiter in enumerate(recruiters, start=1):
@@ -43,14 +43,14 @@ def create_job(company_email):
     recruiter_choice = int(input("Enter the recruiter number: "))
     selected_recruiter = recruiters[recruiter_choice - 1]
 
-    # Save job information to file (AvailableJobs.txt)
+    
     with open("DB\\AvailableJobs.txt", "a") as file:
         file.write(f"{company_email}#{role_name}#{required_skills}#{job_description}#{joining_date}#{selected_recruiter}\n")
 
     print("Job created successfully!")
 
 def delete_job(company_email):
-    # Read available jobs from AvailableJobs.txt
+    
     filteredJobs = []
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file]
@@ -76,7 +76,7 @@ def delete_job(company_email):
     job_choice = int(input("Enter the job number to delete: "))
     selected_job = filteredJobs[job_choice - 1]
 
-    # Remove the selected job from available_jobs list
+    
     available_jobs.remove(selected_job)
     with open("DB\\AvailableJobs.txt", "w") as file:
         file.write("\n".join(available_jobs))
@@ -85,7 +85,7 @@ def delete_job(company_email):
 
 def view_available_jobs(company_email):
     from Recruiter import view_personal_information as recruiterInformation
-    # Read available jobs from AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file if line.startswith(company_email)]
 
@@ -105,7 +105,7 @@ def view_available_jobs(company_email):
             print("--------------------------------------\n")
 
 def view_personal_information(company_email):
-    # Read company information from RegisteredCompanies.txt
+    
     with open("DB\\RegisteredCompanies.txt", "r") as file:
         for line in file:
             email, password, name, license_no, employee_number = line.strip().split("#")
@@ -119,7 +119,7 @@ def view_personal_information(company_email):
                 break
 
 def get_recruiters():
-    # Read registered recruiters from RegisteredRecruiters.txt
+    
     with open("DB\\RegisteredRecruiters.txt", "r") as file:
         recruiters = [line.split("#")[0] for line in file]
 
