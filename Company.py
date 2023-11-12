@@ -112,7 +112,6 @@ def view_personal_information(company_email):
             if email == company_email:
                 print("\n### Personal Information ###")
                 print(f"Email: {email}")
-                # print(f"Password: {password}")  
                 print(f"Name: {name}")
                 print(f"License No: {license_no}")
                 print(f"Employee Number: {employee_number}")
