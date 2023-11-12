@@ -24,7 +24,7 @@ def execute():
             print("Invalid choice. Please try again.")
 
 def generate_random_password():
-    # Generate a random password of length 8
+    
     password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
     return password
 
@@ -38,7 +38,7 @@ def register_developer():
     project_links = input("Enter your project links (comma-separated): ")
     linkedin_link = input("Enter your LinkedIn link: ")
 
-    # Save developer information to file (RegisteredDevelopers.txt)
+    
     with open("DB\\RegisteredDevelopers.txt", "a") as file:
         file.write(f"{email}#{password}#{name}#{age}#{expertise_skills}#{project_links}#{linkedin_link}\n")
 
@@ -53,7 +53,7 @@ def register_company():
     license_no = input("Enter company license number: ")
     employee_number = input("Enter company employee number: ")
 
-    # Save company information to file (RegisteredCompanies.txt)
+    
     with open("DB\\RegisteredCompanies.txt", "a") as file:
         file.write(f"{email}#{password}#{name}#{license_no}#{employee_number}\n")
 
