@@ -1,12 +1,12 @@
 import os
 
 def create_db_folder():
-    # Create a folder named 'DB' if it doesn't exist
+    
     if not os.path.exists("DB"):
         os.makedirs("DB")
 
 def create_db_files():
-    # Create text files for the database if they don't exist
+    
     files = [
         "DB\\RegisteredDevelopers.txt",
         "DB\\RegisteredCompanies.txt",
