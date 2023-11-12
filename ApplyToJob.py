@@ -28,7 +28,7 @@ def execute(developer_email):
             print("Invalid choice. Please try again.")
 
 def view_available_jobs(developer_email):
-    # Read available jobs from AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file]
 
@@ -43,7 +43,7 @@ def apply_to_job(developer_email):
     from Company import view_personal_information as companyInformation
     from Recruiter import view_personal_information as recruiterInformation
 
-    # Read developer skills from RegisteredDevelopers.txt
+    
     developer_skills = None
     with open("DB\\RegisteredDevelopers.txt", "r") as file:
         for line in file:
@@ -54,7 +54,7 @@ def apply_to_job(developer_email):
         print("Developer skills not found.")
         return
 
-    # Read available jobs from AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file]
 
@@ -62,16 +62,16 @@ def apply_to_job(developer_email):
         print("No available jobs to apply.")
         return
 
-    # Filter jobs based on developer skills
+    
     matching_jobs = []
     for job in available_jobs:
-        # company_email, role_name, required_skills, _, _, _ = job.split("#")
+        
         company_email = job.split("#")[0]
         required_skills = job.split("#")[2]
         company_required_skills = set(required_skills.split(", "))
         developer_skills_set = set(developer_skills)
         
-        # Check if any developer skills match the company required skills
+        
         if developer_skills_set.intersection(company_required_skills):
             matching_jobs.append(job)
 
@@ -96,17 +96,16 @@ def apply_to_job(developer_email):
     job_choice = int(input("Enter the job number to apply: "))
     selected_job = matching_jobs[job_choice - 1]
 
-    # Extract company email from the selected job
+    
     company_email = selected_job.split("#")[0]
 
-    # Save application to file (AppliedJobsOfDevelopers.txt)
-     # Check if the application already exists in AppliedJobsOfDevelopers.txt
+    
     if not is_duplicate_application(developer_email, selected_job):
-        # Save application to file (AppliedJobsOfDevelopers.txt)
+        
         with open("DB\\AppliedJobsOfDevelopers.txt", "a") as file:
             file.write(f"{developer_email}#{selected_job}\n")
 
-        # Notify the company about the application
+        
         company_email = selected_job.split("#")[0]
         with open("DB\\MessagesForRecruiters.txt", "a") as file:
             file.write(f"{company_email}#Developer {developer_email} applied to job: {selected_job}\n")
@@ -116,7 +115,7 @@ def apply_to_job(developer_email):
         print("Application already exists. Cannot submit duplicate application.")
 
 def is_duplicate_application(developer_email, selected_job):
-    # Check if the application already exists in AppliedJobsOfDevelopers.txt
+    
     with open("DB\\AppliedJobsOfDevelopers.txt", "r") as file:
         for line in file:
             if line.strip() == f"{developer_email}#{selected_job}":
@@ -126,7 +125,7 @@ def is_duplicate_application(developer_email, selected_job):
 
 
 def view_applied_jobs(developer_email):
-    # Read applied jobs from AppliedJobsOfDevelopers.txt
+    
     with open("DB\\AppliedJobsOfDevelopers.txt", "r") as file:
         applied_jobs = [line.strip() for line in file if line.startswith(developer_email)]
 
@@ -138,7 +137,7 @@ def view_applied_jobs(developer_email):
             print(applied_job)
 
 def view_messages(developer_email):
-    # Read messages from MessagesForDevelopers.txt
+    
     with open("DB\\MessagesForDevelopers.txt", "r") as file:
         messages = [line.strip() for line in file if line.startswith(developer_email)]
 
