@@ -40,7 +40,6 @@ def create_recruiter():
     project_links = input("Enter recruiter project links: ")
     linkedin_link = input("Enter recruiter LinkedIn link: ")
 
-    # Save recruiter information to file (RegisteredRecruiters.txt)
     with open("DB\\RegisteredRecruiters.txt", "a") as file:
         file.write(f"{email}#{password}#{name}#{age}#{expertise_skills}#{project_links}#{linkedin_link}\n")
 
@@ -48,7 +47,7 @@ def create_recruiter():
 
 def delete_company():
     from Company import view_personal_information as companyInformation
-    # Read companies from RegisteredCompanies.txt
+    
     with open("DB\\RegisteredCompanies.txt", "r") as file:
         companies = [line.strip() for line in file]
 
@@ -65,21 +64,21 @@ def delete_company():
     company_choice = int(input("Enter the company number to delete: "))
     selected_company = companies[company_choice - 1]
 
-    # Remove the company from RegisteredCompanies.txt
+    
     with open("DB\\RegisteredCompanies.txt", "w") as file:
         for line in companies:
             if line != selected_company:
                 file.write(line + "\n")
 
-    # Extract company email from the selected company
+    
     selectedCompanyElements = selected_company.split("#")
     company_email = selectedCompanyElements[0]
 
-    # Remove jobs associated with the company from AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file if not line.startswith(company_email)]
 
-    # Write the updated list back to AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "w") as file:
         file.write("\n".join(available_jobs))
 
@@ -87,7 +86,7 @@ def delete_company():
 
 def delete_recruiter():
     from Recruiter import view_personal_information as recruiterInformation
-    # Read recruiters from RegisteredRecruiters.txt
+    
     with open("DB\\RegisteredRecruiters.txt", "r") as file:
         recruiters = [line.strip() for line in file]
 
@@ -104,20 +103,20 @@ def delete_recruiter():
     recruiter_choice = int(input("Enter the recruiter number to delete: "))
     selected_recruiter = recruiters[recruiter_choice - 1]
 
-    # Remove the recruiter from RegisteredRecruiters.txt
+    
     with open("DB\\RegisteredRecruiters.txt", "w") as file:
         for line in recruiters:
             if line != selected_recruiter:
                 file.write(line + "\n")
 
-    # Extract recruiter email from the selected recruiter
+    
     recruiter_email = selected_recruiter.split("#")[0]
 
-    # Remove jobs associated with the recruiter from AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "r") as file:
         available_jobs = [line.strip() for line in file if recruiter_email not in line]
 
-    # Write the updated list back to AvailableJobs.txt
+    
     with open("DB\\AvailableJobs.txt", "w") as file:
         file.write("\n".join(available_jobs))
 
@@ -126,7 +125,7 @@ def delete_recruiter():
 
 def delete_developer():
     from Developer import view_personal_information as developerInformation
-    # Read developers from RegisteredDevelopers.txt
+    
     with open("DB\\RegisteredDevelopers.txt", "r") as file:
         developers = [line.strip() for line in file]
 
@@ -143,13 +142,13 @@ def delete_developer():
     developer_choice = int(input("Enter the developer number to delete: "))
     selected_developer = developers[developer_choice - 1]
 
-    # Remove the developer from RegisteredDevelopers.txt
+    
     with open("DB\\RegisteredDevelopers.txt", "w") as file:
         for line in developers:
             if line != selected_developer:
                 file.write(line + "\n")
 
-    # Remove applications and messages associated with the developer
+    
     with open("DB\\AppliedJobsOfDevelopers.txt", "r") as file:
         applied_jobs = [line.strip() for line in file if selected_developer.split("#")[0] in line]
 
@@ -174,7 +173,7 @@ def create_admin():
     password = input("Enter admin password: ")
     name = input("Enter admin name: ")
 
-    # Save admin information to file (Admins.txt)
+    
     with open("DB\\Admins.txt", "a") as file:
         file.write(f"{email}#{password}#{name}\n")
 
